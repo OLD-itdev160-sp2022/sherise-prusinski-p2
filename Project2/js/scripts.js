@@ -27,26 +27,35 @@ class Resource {
     }
 }
 
+function addOptionToDataList(elementName,optionName) {
+
+    var dataListEl = document.getElementById(elementName);
+    var fragment = document.createDocumentFragment();
+
+    var optionEl = document.createElement('option');
+    var optionTextEl = document.createTextNode(optionName);
+    optionEl.id = 'option'+ nextId ;
+    optionEl.value = optionName;
+    optionEl.appendChild(optionTextEl);
+    fragment.appendChild(optionEl);
+    dataListEl.appendChild(fragment);
+    return optionEl.id;
+}
+
 function addTeam(event) {
     var tname = document.getElementById('ant-tname').value;
 
     var team = new Team(nextId, tname);
-    var teamIndex = teams.findIndex((team,index) => team.name === tname);
+    var teamIndex = teams.findIndex((t) => t.name === tname);
     if(teamIndex < 0) {
-        teams.push(team);
-        nextId++;
         var teamListInputEl = document.getElementById('anr-tname-in');
         teamListInputEl.disabled = false;
-
-        var teamListEl = document.getElementById('anr-tname');
-        var fragment = document.createDocumentFragment();
-
-        var teamOptionEl = document.createElement('option');
-        var teamOptionTextEl = document.createTextNode(tname);
-        teamOptionEl.value = tname;
-        teamOptionEl.appendChild(teamOptionTextEl);
-        fragment.appendChild(teamOptionEl);
-        teamListEl.appendChild(fragment);
+        var teamListInputEl = document.getElementById('dat-tname-in');
+        teamListInputEl.disabled = false;
+        team.id = addOptionToDataList('anr-tname', tname);
+        team.id = addOptionToDataList('dat-tname', tname);
+        teams.push(team);
+        ++nextId;
     }
     else {
         alert(tname + ' already exists!');
@@ -58,7 +67,7 @@ function addProgramProject(event) {
 
     var progproj = new ProgramProject(nextId, pname);
     progprojs.push(progproj);
-    nextId++;
+    ++nextId;
 }
 
 function addResource(event) {
@@ -69,7 +78,15 @@ function addResource(event) {
 
     var resource = new Resource(nextId, firstName, lastName, teamName, status);
     resources.push(resource);
-    nextId++;
+    ++nextId;
+}
+
+function deleteTeam(event) {
+    var tname = document.getElementById('dat-tname-in').value;
+    var deleteIndex = teams.findIndex((t) => t.name === tname);
+    var deleteEls = document.querySelectorAll("#" + teams[deleteIndex].id);
+    deleteEls.forEach((delEl)=>delEl.remove());
+    delete teams[deleteIndex];
 }
 
 function setUp() {
@@ -79,6 +96,7 @@ function setUp() {
     document.getElementById('add-resource').onclick = addResource;
     document.getElementById('add-team').onclick = addTeam;
     document.getElementById('add-progproj').onclick = addProgramProject;
+    document.getElementById('delete-team').onclick = deleteTeam;
 }
 
 function run() {

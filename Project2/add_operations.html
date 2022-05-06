@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Project and Program Management Hub</title>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/latest/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/master.css">
+    <link rel="shortcut icon" href="./images/favicon.ico">
+    <script type="text/javascript" src="js/scripts.js"></script>
+</head>
+
+<body>
+    <header>
+        <aside>
+            <nav class="horizontalNavBar">
+                <a href="index.html">Home</a>
+                <a class="under-construction" href="simple_monthly_allocator.html">Simple Monthly Resource Allocator</a>
+            </nav>
+        </aside>
+        <h1>Project and Program Management Hub</h1>
+    </header>
+    <main>
+        <img id="header-image" src="images/Main.jpg" alt="Project and Program Management Hub">
+        <div id="product-description">
+            One stop shop for all your project and program management needs.
+        </div>
+        <div class="main">
+            <div class="left-panel">
+                <nav class="leftPanelNavBar">
+                    <a href="index.html">Home</a>
+                    <a class="under-construction" href="simple_monthly_allocator.html">Simple Monthly Resource Allocator</a>
+                    <a class="under-construction" href="add_operations.html">Add Operations</a>
+                    <a class="under-construction" href="delete_operations.html">Delete Operations</a>
+                </nav>
+            </div>
+            <div class="right-panel">
+                <fieldset id="ant">
+                    <legend>Add new team:</legend>
+                    <label for="ant-tname">Team Name:</label>
+                    <input type="text" id="ant-tname" name="ant-tname" value="" required>
+                    <br>
+                    <button type="button" id="add-team">Add</button>
+                </fieldset>
+
+                <fieldset id="anp">
+                    <legend>Add new program/project:</legend>
+                    <label for="anp-pname">Program/Project Name:</label>
+                    <input type="text" id="anp-pname" name="anp-pname" value="" required>
+                    <br>
+                    <button type="button" id="add-progproj">Add</button>
+                </fieldset>
+
+                <fieldset id="anr">
+                    <legend>Add new resource:</legend>
+                    <label for="anr-fname">First Name:</label>
+                    <input type="text" id="anr-fname" name="anr-fname" value="" required>
+                    <br>
+                    <label for="anr-lname">Last Name:</label>
+                    <input type="text" id="anr-lname" name="anr-lname" value="" required>
+                    <br>
+                    <label for="anr-tname">Team Name:</label>
+                    <input list="anr-tname" value="None" id="anr-tname-in" name="anr-lname-in" disabled>
+                    <datalist id="anr-tname">
+                        <option value="None" />
+                    </datalist>
+                    <br>
+                    <label for="anr-status">Status :</label>
+                    <input list="anr-status" value="Available" id="anr-status-in" name="anr-status-in">
+                    <datalist id="anr-status">
+                        <option value="Available" />
+                        <option value="Not Available" />
+                    </datalist>
+                    <br>
+                    <button type="button" id="add-resource">Add</button>
+                </fieldset>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <aside>
+            <p>
+                Read more at :
+            </p>
+            <nav class="horizontalNavBar">
+                <a href="https://en.wikipedia.org/wiki/Project_management">Project Management</a>
+                <a href="https://en.wikipedia.org/wiki/Program_management">Program Management</a>
+                <a href="https://en.wikipedia.org/wiki/Waterfall_model">Waterfall methodology</a>
+                <a href="https://en.wikipedia.org/wiki/Agile">Agile methodology</a>
+                <a href="https://en.wikipedia.org/wiki/Scrum">Scrum methodology</a>
+                <a href="https://en.wikipedia.org/wiki/Kanban">Kanban methodology</a>
+                <a href="https://en.wikipedia.org/wiki/Scrumban">Scrumban methodology</a>
+            </nav>
+        </aside>
+    </footer>
+</body>
+
+</html>
