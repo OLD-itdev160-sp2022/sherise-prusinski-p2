@@ -39,18 +39,14 @@ function addTeam(event) {
         teamListInputEl.disabled = false;
 
         var teamListEl = document.getElementById('anr-tname');
+        var fragment = document.createDocumentFragment();
 
         var teamOptionEl = document.createElement('option');
+        var teamOptionTextEl = document.createTextNode(tname);
         teamOptionEl.value = tname;
-        teamListEl.appendChild(teamOptionEl);
-
-        /*
-        var optionListStr = '';
-        for(var i=0; i < teams.length; ++i) {
-            optionListStr += '<option value="'+ teams[i].name +'" />';
-        }
-        teamListEl.innerHTML = optionListStr;
-        */
+        teamOptionEl.appendChild(teamOptionTextEl);
+        fragment.appendChild(teamOptionEl);
+        teamListEl.appendChild(fragment);
     }
     else {
         alert(tname + ' already exists!');
