@@ -44,16 +44,15 @@ function addOptionToDataList(elementName,optionName) {
 
 function addTeam(event) {
     var tname = document.getElementById('ant-tname').value;
-
-    var team = new Team(nextId, tname);
     var teamIndex = teams.findIndex((t) => t.name === tname);
     if(teamIndex < 0) {
         var teamListInputEl = document.getElementById('anr-tname-in');
         teamListInputEl.disabled = false;
         var teamListInputEl = document.getElementById('dat-tname-in');
         teamListInputEl.disabled = false;
-        team.id = addOptionToDataList('anr-tname', tname);
-        team.id = addOptionToDataList('dat-tname', tname);
+        var tid = addOptionToDataList('anr-tname', tname);
+        tid = addOptionToDataList('dat-tname', tname);
+        var team = new Team(tid, tname);
         teams.push(team);
         ++nextId;
     }
@@ -65,9 +64,18 @@ function addTeam(event) {
 function addProgramProject(event) {
     var pname = document.getElementById('anp-pname').value;
 
-    var progproj = new ProgramProject(nextId, pname);
-    progprojs.push(progproj);
-    ++nextId;
+    var progprojIndex = progprojs.findIndex((p) => p.name === pname);
+    if(progprojIndex < 0) {
+        var progprojListInputEl = document.getElementById('dap-pname-in');
+        progprojListInputEl.disabled = false;
+        var pid = addOptionToDataList('dap-pname', pname);
+        var progproj = new ProgramProject(pid, pname);
+        progprojs.push(progproj);
+        ++nextId;
+    }
+    else {
+        alert(pname + ' already exists!');
+    }
 }
 
 function addResource(event) {
@@ -87,16 +95,35 @@ function deleteTeam(event) {
     var deleteEls = document.querySelectorAll("#" + teams[deleteIndex].id);
     deleteEls.forEach((delEl)=>delEl.remove());
     delete teams[deleteIndex];
+    if(teams.length <= 2) {
+        document.getElementById('anr-tname-in').disabled = true;
+        document.getElementById('dat-tname-in').disabled = true;
+    }
+}
+
+function deleteProgramProject(event) {
+    var pname = document.getElementById('dap-pname-in').value;
+    var deleteIndex = progprojs.findIndex((p) => p.name === pname);
+    var deleteEls = document.querySelectorAll("#" + progprojs[deleteIndex].id);
+    deleteEls.forEach((delEl)=>delEl.remove());
+    delete progprojs[deleteIndex];
+    if(progprojs.length <= 2) {
+        document.getElementById('dap-pname-in').disabled = true;
+    }
 }
 
 function setUp() {
     var team = new Team(nextId, "None");
     teams.push(team);
 
+    var progproj = new ProgramProject(nextId, "None");
+    progprojs.push(progproj);
+
     document.getElementById('add-resource').onclick = addResource;
     document.getElementById('add-team').onclick = addTeam;
     document.getElementById('add-progproj').onclick = addProgramProject;
     document.getElementById('delete-team').onclick = deleteTeam;
+    document.getElementById('delete-progproj').onclick = deleteProgramProject;
 }
 
 function run() {

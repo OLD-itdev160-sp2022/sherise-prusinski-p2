@@ -16,7 +16,13 @@ td {
     align-items: center;
     text-align: center;
     text-justify:distribute-all-lines;
- }
+}
+
+datalist {
+    display: none;
+    animation: both;
+    animation-duration: 100ms;
+}
 
 body {
     font-family: sans-serif, "Open Sans", 'Courier New', Courier, monospace;
