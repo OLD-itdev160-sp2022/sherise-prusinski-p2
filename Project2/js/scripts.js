@@ -31,8 +31,30 @@ function addTeam(event) {
     var tname = document.getElementById('ant-tname').value;
 
     var team = new Team(nextId, tname);
-    teams.push(team);
-    nextId++;
+    var teamIndex = teams.findIndex((team,index) => team.name === tname);
+    if(teamIndex < 0) {
+        teams.push(team);
+        nextId++;
+        var teamListInputEl = document.getElementById('anr-tname-in');
+        teamListInputEl.disabled = false;
+
+        var teamListEl = document.getElementById('anr-tname');
+
+        var teamOptionEl = document.createElement('option');
+        teamOptionEl.value = tname;
+        teamListEl.appendChild(teamOptionEl);
+
+        /*
+        var optionListStr = '';
+        for(var i=0; i < teams.length; ++i) {
+            optionListStr += '<option value="'+ teams[i].name +'" />';
+        }
+        teamListEl.innerHTML = optionListStr;
+        */
+    }
+    else {
+        alert(tname + ' already exists!');
+    }
 }
 
 function addProgramProject(event) {
@@ -55,6 +77,9 @@ function addResource(event) {
 }
 
 function setUp() {
+    var team = new Team(nextId, "None");
+    teams.push(team);
+
     document.getElementById('add-resource').onclick = addResource;
     document.getElementById('add-team').onclick = addTeam;
     document.getElementById('add-progproj').onclick = addProgramProject;
