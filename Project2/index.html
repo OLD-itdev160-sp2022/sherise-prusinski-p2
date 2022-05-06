@@ -12,9 +12,41 @@
 
 <body>
     <header>
-        <h1>Project 2</h1>
+        <h1>Project/Program Allocation</h1>
     </header>
     <main>
+        <fieldset>
+            <legend>Add new team:</legend>
+            
+            <label for="ant-tname">Team Name:</label>
+            <input type="text" id="ant-tname" name="ant-tname" value=""> 
+            <button type="button" id="add-team">Add</button>
+        </fieldset>
+
+        <fieldset>
+            <legend>Add new resource:</legend>
+            
+            <label for="anr-fname">First Name:</label>
+            <input type="text" id="anr-fname" name="anr-fname" value="">
+            
+            <label for="anr-lname">Last Name:</label>
+            <input type="text" id="anr-lname" name="anr-lname" value="">
+            
+            <label for="anr-tname">Team Name:</label>
+            <input list="anr-tname" value="None" id="anr-tname-in" name="anr-lname-in">
+            <datalist id="anr-tname">
+                <option value="None">
+            </datalist>  
+            
+            <label for="anr-status">Status :</label>
+            <input list="anr-status" value="Available" id="anr-status-in" name="anr-status-in">
+            <datalist id="anr-status" >
+                <option value="Available">
+                <option value="Not Available">
+            </datalist>
+            
+            <button type="button" id="add-resource">Add</button>
+        </fieldset>
     </main>
     <footer>
     </footer>
