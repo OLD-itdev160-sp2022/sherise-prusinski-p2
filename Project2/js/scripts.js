@@ -1,7 +1,11 @@
+// Data, classes, and utility functions
 var resources = [];
 var teams = [];
 var progprojs= [];
+var allocations = [];
 var nextId = 1;
+var months = [ "January", "February", "March", "April", "May", "June", 
+                "July", "August", "September", "October", "November", "December" ];
 
 class Team {
     constructor(id, name) {
@@ -30,10 +34,20 @@ class Resource {
     }
 }
 
+class Allocation {
+    constructor(id,progproj, resource, month) {
+        this.id = id;
+        this.progproj = progproj;
+        this.resource = resource;
+        this.month = month;
+    }
+}
+
 function getLength(arr) {
     return Object.keys(arr).length;
 }
 
+//Add operations
 function addOptionToDataList(elementName,optionName) {
 
     var dataListEl = document.getElementById(elementName);
@@ -78,9 +92,10 @@ function addProgramProject(event) {
         progprojIndex = progprojs.findIndex((p) => p !== undefined && p.name === pname);
     }
     if(progprojIndex < 0) {
-        var progprojListInputEl = document.getElementById('dap-pname-in');
-        progprojListInputEl.disabled = false;
+        document.getElementById('dap-pname-in').disabled = false;
+        document.getElementById('aap-pname-in').disabled = false;
         var pid = addOptionToDataList('dap-pname', pname);
+        pid = addOptionToDataList('aap-pname', pname);
         var progproj = new ProgramProject(pid, pname);
         progprojs.push(progproj);
         ++nextId;
@@ -103,9 +118,10 @@ function addResource(event) {
         resourceIndex = resources.findIndex((r) => r !== undefined && r.toString() === rname);
     }
     if(resourceIndex < 0) {
-        var resourceListInputEl = document.getElementById('dar-rname-in');
-        resourceListInputEl.disabled = false;
+        document.getElementById('dar-rname-in').disabled = false;
+        document.getElementById('aar-rname-in').disabled = false;
         resource.id = addOptionToDataList('dar-rname', rname);
+        resource.id = addOptionToDataList('aar-rname', rname);
         resources.push(resource);
         ++nextId;
     }
@@ -114,6 +130,7 @@ function addResource(event) {
     }
 }
 
+//Delete operations
 function deleteTeam(event) {
     var tname = document.getElementById('dat-tname-in').value;
     var deleteIndex = -1;
@@ -146,6 +163,8 @@ function deleteProgramProject(event) {
         if (getLength(progprojs) <= 1) {
             document.getElementById('dap-pname-in').value = "";
             document.getElementById('dap-pname-in').disabled = true;
+            document.getElementById('aap-pname-in').value = "";
+            document.getElementById('aap-pname-in').disabled = true;
         }
     }
 }
@@ -159,11 +178,67 @@ function deleteResource(event) {
     if(deleteIndex > -1) {
         var deleteEls = document.querySelectorAll("#" + resources[deleteIndex].id);
         deleteEls.forEach((delEl)=> delEl.remove());
-        delete resources[deleteIndex];
         if(getLength(resources) <= 1) {
             document.getElementById('dar-rname-in').value = "";
             document.getElementById('dar-rname-in').disabled = true;
+            document.getElementById('aar-rname-in').value = "";
+            document.getElementById('aar-rname-in').disabled = true;
         }
+        delete resources[deleteIndex];
+    }
+}
+
+function createTableDataElem(value) {
+    var elem = document.createElement('td');
+    elem.className = "alloc_table_td";
+    var textElem= document.createTextNode(value);
+    elem.appendChild(textElem);
+    return elem;
+}
+
+function allocate(event) {
+    var rname = document.getElementById('aar-rname-in').value;
+    var month = document.getElementById('aam-mname-in').value;
+    var resource = undefined;
+
+    if(month === "") {
+        alert("Select a month from the list");
+        return;
+    }
+
+    if(getLength(resources) > 0) {
+        resource = resources.find((r) => r !== undefined && r.toString() === rname);
+    }
+    if(resource !== undefined) {
+        var pname = document.getElementById('aap-pname-in').value;
+        var progproj = undefined;
+        if(getLength(progprojs) > 0) {
+            progproj = progprojs.find((p) => p !== undefined && p.name === pname);
+        }
+        if(resource !== undefined) {
+            var allocateObj = new Allocation(nextId, progproj, resource,month);
+            allocations.push(allocateObj);
+            ++nextId;
+            document.getElementById('allocation-table').hidden = false;
+            var allocTableEl = document.getElementById('allocation-table-body');
+            var allocTableRowEl = document.createElement('tr');
+            allocTableRowEl.id = "tr" + allocateObj.id;
+
+            var allocTableDataResourceNameEl = createTableDataElem(resource.toString());
+            var allocTableDataProgProjNameEl = createTableDataElem(progproj.name);
+            var allocTableTimePeriodNameEl = createTableDataElem(month);
+
+            allocTableRowEl.appendChild(allocTableDataResourceNameEl);
+            allocTableRowEl.appendChild(allocTableDataProgProjNameEl);
+            allocTableRowEl.appendChild(allocTableTimePeriodNameEl);
+            allocTableEl.appendChild(allocTableRowEl);
+        }
+        else{
+            alert("Non recoverable error occured during allocation operation!");
+        }
+    }
+    else{
+        alert("Non recoverable error occured during allocation operation!");
     }
 }
 
@@ -173,6 +248,10 @@ function setUp() {
 
     var progproj = new ProgramProject(nextId, "None");
     progprojs.push(progproj);
+    
+    months.forEach((month) => {
+        month !== undefined && addOptionToDataList("aam-mname", month);
+    });
 
     document.getElementById('add-team').onclick = addTeam;
     document.getElementById('add-progproj').onclick = addProgramProject;
@@ -180,6 +259,7 @@ function setUp() {
     document.getElementById('delete-team').onclick = deleteTeam;
     document.getElementById('delete-progproj').onclick = deleteProgramProject;
     document.getElementById('delete-resource').onclick = deleteResource;
+    document.getElementById('allocate').onclick = allocate;
 }
 
 function run() {

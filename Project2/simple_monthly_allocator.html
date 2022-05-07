@@ -91,9 +91,9 @@
                                 <button type="button" id="delete-team">Delete</button>
                             </fieldset>
                             <fieldset id="dap">
-                                <legend>Select a Program/Project:</legend>
+                                <legend>Select a program/project:</legend>
                                 <label for="dap-pname">Program/Project Name:</label>
-                                <input list="dap-pname" id="dap-pname-in" name="dap-tname-in" disabled>
+                                <input list="dap-pname" id="dap-pname-in" name="dap-pname-in" disabled>
                                 <datalist id="dap-pname">
                                 </datalist>
                                 <br>
@@ -109,6 +109,48 @@
                                 <button type="button" id="delete-resource">Delete</button>
                             </fieldset>
                         </fieldset>
+                        <hr>
+                        <fieldset id="allocate-ops">
+                            <legend>Allocate Operations:</legend>
+                            <fieldset id="aar">
+                                <legend>Select a resource:</legend>
+                                <label for="aar-rname">Resource Name:</label>
+                                <input list="aar-rname" id="aar-rname-in" name="aar-rname-in" disabled>
+                                <datalist id="aar-rname">
+                                </datalist>
+                             </fieldset>
+                             <fieldset id="aap">
+                                <legend>Select a program/project:</legend>
+                                <label for="aap-pname">Program/Project Name:</label>
+                                <input list="aap-pname" id="aap-pname-in" name="aap-pname-in" disabled>
+                                <datalist id="aap-pname">
+                                </datalist>
+                            </fieldset>
+                            <fieldset id="aam">
+                                <legend>Select a time period:</legend>
+                                <label for="aam-mname">Time period :</label>
+                                <input list="aam-mname" id="aam-mname-in" name="aam-mname-in" required>
+                                <datalist id="aam-mname">
+                                </datalist>
+                            </fieldset>
+                            <br>
+                            <button type="button" id="allocate">allocate</button>
+                        </fieldset>
+                        <hr>
+                        <table id = "allocation-table" class="alloc_table" hidden>
+                            <thead>
+                                <tr>
+                                    <th class="alloc_table_th">Resource Name</th>
+                                    <th class="alloc_table_th">Project/Program Name</th>
+                                    <th class="alloc_table_th">Time Period</th>
+                                </tr>
+                            </thead>
+                            <tbody id="allocation-table-body">
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+
                     </div>
                 </div>
             </main>
