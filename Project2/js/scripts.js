@@ -30,6 +30,10 @@ class Resource {
     }
 }
 
+function getLength(arr) {
+    return Object.keys(arr).length;
+}
+
 function addOptionToDataList(elementName,optionName) {
 
     var dataListEl = document.getElementById(elementName);
@@ -48,8 +52,8 @@ function addOptionToDataList(elementName,optionName) {
 function addTeam(event) {
     var tname = document.getElementById('ant-tname').value;
     var teamIndex = -1;
-    if(teams.length > 0) {
-        teamIndex = teams.findIndex((t) => t.name === tname);
+    if(getLength(teams) > 0) {
+        teamIndex = teams.findIndex((t) => t !== undefined && t.name === tname);
     }
     if(teamIndex < 0) {
         var teamListInputEl = document.getElementById('anr-tname-in');
@@ -69,9 +73,9 @@ function addTeam(event) {
 
 function addProgramProject(event) {
     var pname = document.getElementById('anp-pname').value;
-    var progprojIndex = 0;
+    var progprojIndex = -1;
     if(progprojIndex > 0) {
-        progprojIndex = progprojs.findIndex((p) => p.name === pname);
+        progprojIndex = progprojs.findIndex((p) => p !== undefined && p.name === pname);
     }
     if(progprojIndex < 0) {
         var progprojListInputEl = document.getElementById('dap-pname-in');
@@ -94,29 +98,33 @@ function addResource(event) {
 
     var resource = new Resource(nextId, firstName, lastName, teamName, status);
     var resourceIndex = -1;
-    if(resources.length > 0) {
-        resourceIndex = resources.findIndex((r) => r.toString() === resource.toString());
+    var rname = resource.toString();
+    if(getLength(resources) > 0) {
+        resourceIndex = resources.findIndex((r) => r !== undefined && r.toString() === rname);
     }
     if(resourceIndex < 0) {
         var resourceListInputEl = document.getElementById('dar-rname-in');
         resourceListInputEl.disabled = false;
-        resource.id = addOptionToDataList('dar-rname', resource.toString());
+        resource.id = addOptionToDataList('dar-rname', rname);
         resources.push(resource);
         ++nextId;
+    }
+    else {
+        alert(rname + ' already exists!');
     }
 }
 
 function deleteTeam(event) {
     var tname = document.getElementById('dat-tname-in').value;
     var deleteIndex = -1;
-    if(teams.length > 0) {
-        deleteIndex = teams.findIndex((t) => t.name === tname);
+    if(getLength(teams) > 0) {
+        deleteIndex = teams.findIndex((t) => t !== undefined && t.name === tname);
     }
     if(deleteIndex > -1) {
         var deleteEls = document.querySelectorAll("#" + teams[deleteIndex].id);
         deleteEls.forEach((delEl)=>delEl.remove());
         delete teams[deleteIndex];
-        if(teams.length <= 2) {
+        if(getLength(teams) <= 1) {
             document.getElementById('anr-tname-in').disabled = true;
             document.getElementById('anr-tname-in').value = "";
             document.getElementById('dat-tname-in').disabled = true;
@@ -128,14 +136,14 @@ function deleteTeam(event) {
 function deleteProgramProject(event) {
     var pname = document.getElementById('dap-pname-in').value;
     var deleteIndex = -1;
-    if(progprojs.length > 0) {
-        deleteIndex = progprojs.findIndex((p) => p.name === pname);
+    if(getLength(progprojs) > 0) {
+        deleteIndex = progprojs.findIndex((p) => p !== undefined && p.name === pname);
     }
     if (deleteIndex > -1) {
         var deleteEls = document.querySelectorAll("#" + progprojs[deleteIndex].id);
         deleteEls.forEach((delEl) => delEl.remove());
         delete progprojs[deleteIndex];
-        if (progprojs.length <= 2) {
+        if (getLength(progprojs) <= 1) {
             document.getElementById('dap-pname-in').value = "";
             document.getElementById('dap-pname-in').disabled = true;
         }
@@ -145,14 +153,14 @@ function deleteProgramProject(event) {
 function deleteResource(event) {
     var rname = document.getElementById('dar-rname-in').value;
     var deleteIndex = -1;
-    if(resources.length > 0) {
-        deleteIndex = resources.findIndex((r) => r.toString() === rname);
+    if(getLength(resources) > 0) {
+        deleteIndex = resources.findIndex((r) => r !== undefined && r.toString() === rname);
     }
     if(deleteIndex > -1) {
         var deleteEls = document.querySelectorAll("#" + resources[deleteIndex].id);
         deleteEls.forEach((delEl)=> delEl.remove());
         delete resources[deleteIndex];
-        if(resources.length <= 1) {
+        if(getLength(resources) <= 1) {
             document.getElementById('dar-rname-in').value = "";
             document.getElementById('dar-rname-in').disabled = true;
         }
