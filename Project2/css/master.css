@@ -1,15 +1,23 @@
 .container {
-  height: 200px;
-  position: relative;
+    height: 200px;
+    position: relative;
 }
 
 .center {
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -ms-transform: translate(-50%, -5%);
-  transform: translate(-50%, -5%);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -5%);
+    transform: translate(-50%, -5%);
+}
+
+.grid {
+    height: 100px;
+    display: grid;
+    grid-template-areas: "a a";
+    gap: 10px;
+    grid-auto-columns: 200px;
 }
 
 table {
@@ -18,8 +26,8 @@ table {
     align-content: center;
 }
 
-th{
-    font-size:larger;
+th {
+    font-size: larger;
     font-style: oblique;
     border: 0px solid black;
     align-items: center;
@@ -31,7 +39,7 @@ td {
     border: 0px solid black;
     align-items: center;
     text-align: center;
-    text-justify:distribute-all-lines;
+    text-justify: distribute-all-lines;
 }
 
 .alloc_table {
@@ -39,9 +47,9 @@ td {
     columns: 3;
 }
 
-.alloc_table_th{
+.alloc_table_th {
     width: 33%;
-    font-size:larger;
+    font-size: larger;
     font-style: oblique;
     border: 1px solid darkslategray;
     align-items: center;
@@ -54,7 +62,7 @@ td {
     border: 1px solid darkslategray;
     align-items: center;
     text-align: center;
-    text-justify:distribute-all-lines;
+    text-justify: distribute-all-lines;
 }
 
 datalist {
@@ -84,12 +92,23 @@ figure {
     text-align: center;
 }
 
-img {
+.thumbimg {
+    border: 3px solid darkslategray;
     align-content: center;
     margin: auto;
     display: block;
     width: 250px;
     height: 170px;
+    text-align: center;
+}
+
+img {
+    border: 3px solid darkslategray;
+    align-content: center;
+    margin: auto;
+    display: block;
+    width: 640px;
+    height: 480px;
     text-align: center;
 }
 
@@ -103,7 +122,7 @@ figcaption span {
 }
 
 p {
-    column-count: 3;
+    column-count: auto;
     column-width: auto;
 }
 
@@ -113,6 +132,7 @@ p {
     align-items: center;
     overflow: hidden
 }
+
 .fill img {
     flex-shrink: 0;
     min-width: 100%;
@@ -134,9 +154,9 @@ p {
 
 @keyframes blinker {
     50% {
-      opacity: 0;
+        opacity: 0;
     }
-  }
+}
 
 .leftPanelNavBar a {
     text-decoration: none;
@@ -162,11 +182,13 @@ p {
 .horizontalNavBar a {
     text-decoration: none;
     display: block;
-    padding: 15px 25px;
+    padding: 20px 20px;
+    text-align-last: center;
+    
     text-align: center;
     background-color: rgb(189, 185, 185);
     color: #464141;
-    margin: 0; 
+    margin: 0;
     font-family: sans-serif;
 }
 
@@ -177,9 +199,9 @@ p {
 
 aside {
     width: 100%;
-    padding-left: 15px;
-    margin-left: 15px;
-    float:inline-start;
+    padding-left: 0px;
+    margin-left: 0px;
+    float: inline-start;
     font-style: italic;
     background-color: lightgray;
 }
@@ -204,28 +226,28 @@ div.left-panel {
     grid-row: 1;
     height: 100%;
     width: 100%;
-    position:relative;
+    position: relative;
     z-index: 1;
     top: 0;
     overflow-x: hidden;
     padding-top: 20px;
     left: 0;
 }
-  
+
 div.right-panel {
-    float:right;
+    float: right;
     grid-column: 2/6;
     grid-row: 1;
     height: 100%;
     width: 100%;
-    position:relative;
+    position: relative;
     z-index: 1;
     top: 0;
     overflow-x: hidden;
     padding-top: 20px;
     right: 0;
-  }
-  
+}
+
 div.centered {
     position: absolute;
     top: 50%;
@@ -242,7 +264,7 @@ div.centered {
     background-color: #9089ce;
 }
 
-#scrum:hover{
+#scrum:hover {
     background-color: #a4e2d5;
 }
 
@@ -266,12 +288,12 @@ div.centered {
     text-align: center;
 }
 
-.under-construction:hover{
+.under-construction:hover {
     background-color: #d8e24f !important;
 }
 
 label {
-	float: left;
+    float: left;
     width: 11em;
     text-align: right;
 }
@@ -282,8 +304,9 @@ input, select, textarea {
     margin-bottom: .5em;
     width: 70%;
 }
+
 #buttons input {
-	width: 7em;
+    width: 7em;
 }
 
 fieldset {
@@ -291,6 +314,7 @@ fieldset {
     margin-bottom: 1em;
     padding-top: .5em;
 }
+
 legend {
     color: rgb(65, 30, 30);
     font-weight: bold;
@@ -309,6 +333,7 @@ input:focus:invalid {
     background-position: right top;
     background-repeat: no-repeat;
 }
+
 input:required:valid {
     background-image: url(../images/valid.png);
     background-position: right top;

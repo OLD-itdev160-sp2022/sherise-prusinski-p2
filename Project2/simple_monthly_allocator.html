@@ -65,14 +65,14 @@
                                 <label for="anr-tname">Team Name:</label>
                                 <input list="anr-tname" value="None" id="anr-tname-in" name="anr-tname-in" disabled>
                                 <datalist id="anr-tname">
-                                    <option value="None" />
+                                    <option value="None" ></option>
                                 </datalist>
                                 <br>
                                 <label for="anr-status">Status :</label>
                                 <input list="anr-status" value="Available" id="anr-status-in" name="anr-status-in">
                                 <datalist id="anr-status">
-                                    <option value="Available" />
-                                    <option value="Not Available" />
+                                    <option value="Available"></option>
+                                    <option value="Not Available"></option>
                                 </datalist>
                                 <br>
                                 <button type="button" id="add-resource">Add</button>
@@ -88,7 +88,7 @@
                                 <datalist id="dat-tname">
                                 </datalist>
                                 <br>
-                                <button type="button" id="delete-team">Delete</button>
+                                <button type="button" id="delete-team" disabled>Delete</button>
                             </fieldset>
                             <fieldset id="dap">
                                 <legend>Select a program/project:</legend>
@@ -97,7 +97,7 @@
                                 <datalist id="dap-pname">
                                 </datalist>
                                 <br>
-                                <button type="button" id="delete-progproj">Delete</button>
+                                <button type="button" id="delete-progproj" disabled>Delete</button>
                             </fieldset>
                             <fieldset id="dar">
                                 <legend>Select a resource:</legend>
@@ -106,7 +106,7 @@
                                 <datalist id="dar-rname">
                                 </datalist>
                                 <br>
-                                <button type="button" id="delete-resource">Delete</button>
+                                <button type="button" id="delete-resource" disabled>Delete</button>
                             </fieldset>
                         </fieldset>
                         <hr>
@@ -118,8 +118,8 @@
                                 <input list="aar-rname" id="aar-rname-in" name="aar-rname-in" disabled>
                                 <datalist id="aar-rname">
                                 </datalist>
-                             </fieldset>
-                             <fieldset id="aap">
+                            </fieldset>
+                            <fieldset id="aap">
                                 <legend>Select a program/project:</legend>
                                 <label for="aap-pname">Program/Project Name:</label>
                                 <input list="aap-pname" id="aap-pname-in" name="aap-pname-in" disabled>
@@ -134,10 +134,10 @@
                                 </datalist>
                             </fieldset>
                             <br>
-                            <button type="button" id="allocate">allocate</button>
+                            <button type="button" id="allocate" disabled>allocate</button>
                         </fieldset>
                         <hr>
-                        <table id = "allocation-table" class="alloc_table" hidden>
+                        <table id="allocation-table" class="alloc_table" hidden>
                             <thead>
                                 <tr>
                                     <th class="alloc_table_th">Resource Name</th>
